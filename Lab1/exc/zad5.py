@@ -5,15 +5,15 @@ def lu_decomposition(A):
     Faktoryzacja LU macierzy A, zwraca macierze L i U
     """
     n = len(A)
-    L = np.eye(n)
-    U = A.astype(float)
+    L = np.eye(n)           # utworzenie macierzy jednostkowej dolnotrójkątne L
+    U = A.astype(float)     # przypisanie wartości macierzy A do macierzy U (docelowo górnotrójkątnej)
 
     for i in range(n):
         for j in range(i+1, n):
-            factor = U[j, i] / U[i,i]
-            L[j,i] = factor
+            factor = U[j, i] / U[i,i]       # obliczanie mnożnika
+            L[j,i] = factor                 # zapamiętanie mnożnika w macierzy L
             for k in range(i, n):
-                U[j,k] -= factor * U[i, k]
+                U[j,k] -= factor * U[i, k]  # eliminacja dolnej części macierzy
 
     return L, U
 
