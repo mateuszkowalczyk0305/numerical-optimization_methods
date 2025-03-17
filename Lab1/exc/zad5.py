@@ -87,5 +87,6 @@ U = np.array([[1, 2, 3, 4],
 
 # Sprawdzenie czy L * U ≈ A
 A_reconstructed = np.dot(L, U)
+print("Sprawdzenie macierzy A:")
 print(np.round(A_reconstructed, 4))  # Porównaj z oryginalną macierzą A
 
