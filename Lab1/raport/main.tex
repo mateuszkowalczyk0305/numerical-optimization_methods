@@ -1,0 +1,503 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{blindtext}
+\usepackage{gensymb}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+%\usepackage{unicode-math}
+\usepackage{chngpage}
+\usepackage{multirow}  
+\usepackage{varwidth}
+\usepackage{pdfpages}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{polski}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[export]{adjustbox}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{makecell}
+\usepackage{multirow}
+\usepackage[margin=1in]{geometry}
+\usepackage{listings}
+
+
+\renewcommand\theadalign{bc}
+\renewcommand\theadfont{\bfseries}
+\renewcommand\theadgape{\Gape[4pt]}
+\renewcommand\cellgape{\Gape[4pt]}
+
+
+
+\begin{document}
+ \begin{center}
+  \includegraphics[width=0.8\textwidth]{logo_pwr.png} \\[1cm] % Logo PWr
+        %\vfill
+        \bigskip
+            \begin{tabular}{|c|c|c|c|}
+                \hline \multicolumn{3}{|c|}{\thead{ Metody numeryczne i optymalizacja}} \\
+                \hline \makecell{Termin:\\piątek: 11:15} & \makecell{Nr ćwiczenia:\\1} & \makecell
+                {METODY BEZPOŚREDNIE DLA ROZWIĄZYWANIA \\
+UKŁADÓW RÓWNAŃ LINIOWYCH}  \\
+                \hline \makecell{Nr grupy: \\ 6} & \makecell{Data wykonania\\ ćwiczenia:\\14.03.25} & \makecell{Skład grupy:\\{Mateusz Wilk 268558}\\{Mateusz Kowalczyk 268533}} \\
+                \hline
+            \end{tabular}
+            %\vfill
+          \end{center}
+
+\newpage
+
+\section{Zadania}
+\subsection{Zadanie 1.}
+\[
+\begin{cases}
+    2u - v = 0, \\
+    -u + 2v - w = 0, \\
+    -v + 2w - z = 0, \\
+    -w + 2z = 5.
+\end{cases}
+\]
+\newline
+Przedstawiamy układ równań w postaci macierzowej:
+
+\[
+\begin{bmatrix}
+2 & -1 & 0 & 0 & | 0 \\
+-1 & 2 & -1 & 0 & | 0 \\
+0 & -1 & 2 & -1 & | 0 \\
+0 & 0 & -1 & 2 & | 5
+\end{bmatrix}
+\]
+
+\textbf{Krok 1:} Wybieramy pierwszy element jako pivot (2 w pierwszym wierszu) i eliminujemy pierwszą kolumnę:
+
+Dodajemy pierwszy wiersz pomnożony przez \( \frac{1}{2} \) do drugiego wiersza:
+
+\[
+R_2 = R_2 + \frac{1}{2} R_1
+\]
+
+Nowa macierz:
+
+\[
+\begin{bmatrix}
+2 & -1 & 0 & 0 & | 0 \\
+0 & \frac{3}{2} & -1 & 0 & | 0 \\
+0 & -1 & 2 & -1 & | 0 \\
+0 & 0 & -1 & 2 & | 5
+\end{bmatrix}
+\]
+
+\textbf{Krok 2:} Wybieramy drugi element (1.5) jako pivot i eliminujemy drugą kolumnę:
+
+Dodajemy drugi wiersz pomnożony przez \( \frac{2}{3} \) do trzeciego wiersza:
+
+\[
+R_3 = R_3 + \frac{2}{3} R_2
+\]
+
+Nowa macierz:
+
+\[
+\begin{bmatrix}
+2 & -1 & 0 & 0 & | 0 \\
+0 & \frac{3}{2} & -1 & 0 & | 0 \\
+0 & 0 & \frac{4}{3} & -1 & | 0 \\
+0 & 0 & -1 & 2 & | 5
+\end{bmatrix}
+\]
+
+\textbf{Krok 3:} Wybieramy trzeci element \( \frac{4}{3} \) jako pivot i eliminujemy trzecią kolumnę:
+
+Dodajemy trzeci wiersz pomnożony przez \( \frac{3}{4} \) do czwartego wiersza:
+
+\[
+R_4 = R_4 + \frac{3}{4} R_3
+\]
+
+Nowa macierz:
+
+\[
+\begin{bmatrix}
+2 & -1 & 0 & 0 & | 0 \\
+0 & 1.5 & -1 & 0 & | 0 \\
+0 & 0 & \frac{4}{3} & -1 & | 0 \\
+0 & 0 & 0 & \frac{5}{4} & | 5
+\end{bmatrix}
+\]
+
+\textbf{Krok 4:} Rozwiązujemy układ równań wstecz.
+
+Z ostatniego równania:
+
+\[
+\frac{5}{4}z = 5 \Rightarrow z\frac{5}{\frac{5}{4}} = 4
+\]
+
+Z trzeciego równania:
+
+\[
+\frac{4}{3}w - 4 = 0 \Rightarrow w = \frac{4}{\frac{4}{3}} = 3
+\]
+
+Z drugiego równania:
+
+\[
+\frac{3}{2}v - 3 = 0 \Rightarrow v = \frac{3}{\frac{3}{2}} = 2
+\]
+
+Z pierwszego równania:
+
+\[
+2u - 2 = 0 \Rightarrow 2u = 2 = 1
+\]
+
+\textbf{Ostateczne rozwiązanie:}
+
+\[
+u = 4, \quad v = 3, \quad w = 2, \quad z = 1
+\]
+
+Elementy podstawowe (pivots): \( 2, \frac{3}{2}, \frac{4}{3}, \frac{5}{4} \).
+\subsection{Zadanie 2.}
+\[
+\begin{cases}
+x_1 + x_2 + x_3 = 1, \\
+x_1 + x_2 + 2x_3 = 2, \\
+x_1 + 2x_2 + 2x_3 = 1.
+\end{cases}
+\]
+\textbf{Krok 1:} Zapisujemy układ równań w postaci macierzowej:
+
+\[
+\begin{bmatrix}
+1 & 1 & 1 & | 1 \\
+1 & 1 & 2 & | 2 \\
+1 & 2 & 2 & | 1
+\end{bmatrix}
+\]
+
+Pierwszy element (1 w lewym górnym rogu) jest pivotem.
+
+\textbf{Krok 2:} Eliminacja pierwszej kolumny.
+
+Odejmujemy pierwszy wiersz od drugiego:
+
+\[
+R_2 = R_2 - R_1
+\]
+
+Odejmujemy pierwszy wiersz od trzeciego:
+
+\[
+R_3 = R_3 - R_1
+\]
+
+Nowa macierz:
+
+\[
+\begin{bmatrix}
+1 & 1 & 1 & | 1 \\
+0 & 0 & 1 & | 1 \\
+0 & 1 & 1 & | 0
+\end{bmatrix}
+\]
+
+\textbf{Krok 3:} Wybór nowego pivota. Drugi wiersz ma element zerowy na diagonali, więc musimy zamienić wiersze 2 i 3:
+
+\[
+\begin{bmatrix}
+1 & 1 & 1 & | 1 \\
+0 & 1 & 1 & | 0 \\
+0 & 0 & 1 & | 1
+\end{bmatrix}
+\]
+
+Teraz mamy poprawne pivoty.
+
+\textbf{Krok 4:} Eliminacja trzeciej kolumny.
+
+Odejmujemy drugi wiersz od trzeciego:
+
+\[
+R_3 = R_3 - R_2
+\]
+
+Ale trzeci wiersz już jest w postaci schodkowej, więc możemy przejść do rozwiązania układu:
+
+\textbf{Krok 5:} Rozwiązanie układu równań wstecz.
+
+Z trzeciego równania:
+
+\[
+x_3 = 1
+\]
+
+Z drugiego równania:
+
+\[
+x_2 + x_3 = 0 \Rightarrow x_2 = -1
+\]
+
+Z pierwszego równania:
+
+\[
+x_1 + x_2 + x_3 = 1 \Rightarrow x_1 - 1 + 1 = 1 \Rightarrow x_1 = 1
+\]
+
+\textbf{Ostateczne rozwiązanie:}
+
+\[
+x_1 = 1, \quad x_2 = -1, \quad x_3 = 1
+\]
+
+\textbf{Dlaczego eliminacja Gaussa bez wyboru elementu podstawowego nie działa poprawnie?}
+
+Bez częściowego wyboru elementu podstawowego moglibyśmy znaleźć się w sytuacji, w której pivot (element diagonalny) byłby zerem, co uniemożliwiłoby poprawne wykonanie eliminacji. W tym przypadku, gdybyśmy nie zamienili drugiego i trzeciego wiersza, to eliminacja prowadziłaby do błędnych obliczeń lub konieczności dzielenia przez zero.
+
+\subsection{Zadanie 3.}
+
+\[
+\begin{cases}
+0.0001x_1 + x_2 = 1, \\
+x_1 + x_2 = 2.
+\end{cases}
+\]
+
+\textbf{Rozwiązanie bez wyboru elementu podstawowego:}
+
+Przekształcamy układ do postaci macierzowej:
+
+\[
+\begin{bmatrix}
+0.0001 & 1 & | 1 \\
+1 & 1 & | 2
+\end{bmatrix}
+\]
+
+Wybieramy \( 0.0001 \) jako pierwszy pivot i eliminujemy pierwszą kolumnę:
+
+\[
+R_2 = R_2 - 10^4 R_1
+\]
+
+\[
+\begin{bmatrix}
+0.0001 & 1 & | 1 \\
+0 & -9999 & | -9998
+\end{bmatrix}
+\]
+
+\textbf{Krok 2:} Rozwiązujemy układ wstecz.
+
+Z drugiego równania:
+
+\[
+-999 x_2 = -9998 \Rightarrow x_2 \approx 1
+\]
+
+Podstawiamy do pierwszego równania:
+
+\[
+0.0001 x_1 + 0.999 = 1 \Rightarrow x_1 = \frac{0.999}{0.0001} = 10
+\]
+
+
+\textbf{Rozwiązanie:}
+
+\[
+x_1 = 10, \quad x_2 = 1
+\]
+
+\textbf{Rozwiązanie z wyborem elementu podstawowego:}
+
+Zamieniamy wiersze, aby największy element w pierwszej kolumnie był pivotem:
+
+\[
+\begin{bmatrix}
+1 & 1 & | 2 \\
+0.0001 & 1 & | 1
+\end{bmatrix}
+\]
+
+Eliminujemy pierwszy element w drugim wierszu:
+
+\[
+R_2 = R_2 - 0.0001 R_1
+\]
+
+\[
+\begin{bmatrix}
+1 & 1 & | 2 \\
+0 & 0.999 & | 0.999
+\end{bmatrix}
+\]
+
+Z drugiego równania:
+
+\[
+0.999 x_2 = 0.999
+\]
+
+\[
+x_2 = 1
+\]
+
+Podstawiamy do pierwszego równania:
+
+\[
+x_1 + 1 = 2
+\]
+
+\[
+x_1 = 1
+\]
+
+\textbf{Ostateczne rozwiązanie:}
+
+\[
+x_1 = 1.00, \quad x_2 = 1.00
+\]
+
+\textbf{Wniosek:} Bez wyboru elementu podstawowego uzyskaliśmy dużą wartość \( x_1 \), co wskazuje na błąd numeryczny. Z wyborem pivota wynik jest poprawny.
+
+\subsection{Zadanie 4.}
+\textbf{Obliczanie układu rownań metodą eliminacji Gaussa.}
+\begin{lstlisting}
+    import numpy as np
+
+# Eliminacja Gaussa:
+def gaussian_elimination(A, b):
+    n = len(b)              # warunek spelniony zawsze dla rownan liniowych 
+    A = A.astype(float)     # konwersja na typ zmiennoprzecinkowy
+    b = b.astype(float)
+
+    # Eliminacja wierszy
+    for i in range(n):                  # przechodzimy przez kazdy wiersz macierzy              
+        for j in range(i + 1, n):       # iteracja przez wiersze ponizej aktualnego pivotu
+            factor = A[j, i] / A[i, i]  
+            for k in range(i, n):       
+                A[j, k] -= factor * A[i, k] # odejmujemy wielkorotnosc pivotu przez factor aby uzyskac zero 
+            b[j] -= factor * b[i]          # analogicznie dla wyrazow wolnych 
+
+    # Podstawianie wsteczne:
+    x = np.zeros(n)                         
+    for i in range(n - 1, -1, -1):          
+        sum_ax = 0
+        for j in range(i + 1, n):           
+            sum_ax += A[i, j] * x[j]
+        x[i] = (b[i] - sum_ax) / A[i, i]    
+
+    return x
+\end{lstlisting}
+
+\begin{lstlisting}
+    
+# Norma macierzy:
+def matrix_norm_1(A):
+    return max(np.sum(np.abs(A), axis=0))  
+        return norm_A * norm_A_inv
+\end{lstlisting}
+    Oblicza norme macierzy $||A||_1$ jako maksimum sumy wartości bezwzględnych w kolumnach.
+\begin{lstlisting}
+# Wskaznik uwarunkowania macierzy:
+def condition_number_1(A):
+    A_inv = np.linalg.inv(A)  
+    norm_A = matrix_norm_1(A)  
+    norm_A_inv = matrix_norm_1(A_inv)  
+
+    return norm_A * norm_A_inv
+\end{lstlisting}
+
+Oblicza wskaznik uwarunkowania macierzy jako $||A||_1 * ||A^(-1)||_1$.
+
+\section{Zaimplementowane algorytmy}
+\subsection{Algorytm Gaussa}
+\begin{lstlisting}
+def gaussian_elimination(A, b):
+    n = len(b)
+    
+    for i in range(n):
+        # Eliminate column below pivot
+        for j in range(i + 1, n):
+            factor = A[j][i] / A[i][i]
+            A[j, i:] -= factor * A[i, i:]
+            b[j] -= factor * b[i]
+    
+    # Back substitution
+    x = np.zeros(n)
+    for i in range(n - 1, -1, -1):
+        x[i] = (b[i] - np.dot(A[i, i + 1:], x[i + 1:])) / A[i, i]
+    
+    return x
+\end{lstlisting}
+
+\subsection{Algorytm Gaussa z wyborem elementu podstawowego}
+\begin{lstlisting}
+    def gaussian_elimination_pivoting(A, b):
+    n = len(b)
+    
+    for i in range(n):
+        # Partial Pivoting: Select row with maximum absolute value in current column
+        max_row = max(range(i, n), key=lambda r: abs(A[r][i]))
+        A[[i, max_row]] = A[[max_row, i]]  # Swap rows
+        b[[i, max_row]] = b[[max_row, i]]
+        
+        # Eliminate column below pivot
+        for j in range(i + 1, n):
+            factor = A[j][i] / A[i][i]
+            A[j, i:] -= factor * A[i, i:]
+            b[j] -= factor * b[i]
+    
+    # Back substitution
+    x = np.zeros(n)
+    for i in range(n - 1, -1, -1):
+        x[i] = (b[i] - np.dot(A[i, i + 1:], x[i + 1:])) / A[i, i]
+    
+    return x
+\end{lstlisting}
+\subsection{Algorytm podstawienie w przód}
+\begin{itemize}
+    \item \textbf{param L:} macierz dolnotrójkątna (n x n) jako lista list
+    \item \textbf{param b:} wektor prawych stron (n x 1) jako lista
+    \item \textbf{return:} wektor rozwiązań x (n x 1) jako lista
+\end{itemize}
+
+\begin{lstlisting}
+    def forward_substitution(L, b):
+    n = len(b)
+    x = [0] * n
+    
+    def dot_product(a, b):
+        return sum(a[i] * b[i] for i in range(len(a)))
+    
+    for i in range(n):
+        x[i] = (b[i] - dot_product(L[i][:i], x[:i])) / L[i][i]
+    
+    return x
+\end{lstlisting}
+\subsection{Algorytm podstawienie wsteczne}
+\begin{lstlisting}
+    def backward_substitution(U, b):
+
+    n = len(b)
+    x = [0.0] * n  
+    
+    for i in range(n-1, -1, -1):
+        if U[i][i] == 0:
+            raise ValueError("Macierz jest osobliwa - nie mozna 
+            wykonac podstawienia wstecznego.")
+        
+        suma = sum(U[i][j] * x[j] for j in range(i+1, n))
+        x[i] = (b[i] - suma) / U[i][i]
+    
+    return x
+\end{lstlisting}
+
+
+
+\end{document}
+https://eduinf.waw.pl/inf/alg/001_search/0079.php
