@@ -74,7 +74,7 @@ print(f"Rozwiązanie układu Ax = b: x = {[np.round(x,3).tolist()]}\n") # zaokr�
 """
     Sprawdzenie obliczeń
 """
-# Twoje macierze L i U (zaokrąglone do 4 miejsc po przecinku)
+# Macierze L i U (zaokrąglone do 4 miejsc po przecinku)
 L = np.array([[1, 0, 0, 0],
               [-1, 1, 0, 0],
               [0, 0.6667, 1, 0],
