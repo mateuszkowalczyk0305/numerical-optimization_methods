@@ -61,11 +61,31 @@ y = forward_substitution(L, b)
 x = backward_substitution(U, y)
 
 # Wyznacznik macierzy:
-det_A = np.prod(np.diag(U))
+det_A = np.prod(np.diag(U))     # oblicza iloczyn wszystkich elementów w podanej tablicy
 
 # Wyniki:
 print("Macierz L:\n", L, "\n")
 print("Macierz U:\n", U, "\n")
 print(f"Wyznacznik macierzy A: {det_A}\n")
 print(f"Rozwiązanie układu Ax = b: x = {[np.round(x,3).tolist()]}\n") # zaokrąglenie do 3 liczb znaczących
+
+
+
+"""
+    Sprawdzenie obliczeń
+"""
+# Twoje macierze L i U (zaokrąglone do 4 miejsc po przecinku)
+L = np.array([[1, 0, 0, 0],
+              [-1, 1, 0, 0],
+              [0, 0.6667, 1, 0],
+              [0, 0, -0.4286, 1]])
+
+U = np.array([[1, 2, 3, 4],
+              [0, 3, 5, 5],
+              [0, 0, -2.3333, -0.3333],
+              [0, 0, 0, 0.85714286]])
+
+# Sprawdzenie czy L * U ≈ A
+A_reconstructed = np.dot(L, U)
+print(np.round(A_reconstructed, 4))  # Porównaj z oryginalną macierzą A
 
