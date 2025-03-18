@@ -35,7 +35,7 @@ A = np.array([
 Q, R = gram_schmidt(A)
 
 # Zaokrąglnie wyniku:
-Q = np.round(Q, 3)  # Zaokraglenie do 4 miejsc po przecinku
+Q = np.round(Q, 3)  # Zaokraglenie do 3 miejsc po przecinku
 R = np.round(R, 3)  # Zaokraglenie macierzy R
 
 # Normalizacja znaku macierzy R
